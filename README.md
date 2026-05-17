@@ -1,79 +1,69 @@
 # Loan Management System
 
-A production-ready loan management system with a modern fintech landing page, borrower onboarding flow, and role-based executive dashboards.
+A production-ready loan management platform with a modern Next.js frontend, a TypeScript Express API, and shared business logic for loan workflows, borrower onboarding, OTP verification, and executive dashboards.
 
-## Features
+## Overview
 
-- Next.js 15 App Router frontend with Tailwind CSS, Framer Motion, and reusable UI components
-- Express.js + TypeScript REST API with JWT auth, bcrypt, RBAC, and Mongoose
-- MongoDB-backed borrower profiles, loans, documents, payments, notifications, and refresh sessions
-- BRE validation on the backend and mirrored frontend UX validation
-- Loan lifecycle support: APPLIED → SANCTIONED → DISBURSED → CLOSED, plus REJECTED
-- Email OTP verification for registration and login
-- Salary slip upload with Cloudinary or local storage fallback
-- Dashboard analytics with tables, charts, filters, search, pagination, export, and modals
-- Docker, CI, Vercel, and Render-ready configuration
+This repository contains a monorepo-based loan management system designed for small to medium lending operations. It includes a public landing page, role-based dashboards, borrower workflows, loan lifecycle management, payment tracking, and deployment-ready configuration for Vercel and Render.
+
+## Key Features
+
+- Modern landing page and authenticated dashboard experiences
+- Role-based access control for ADMIN, SALES, SANCTION, DISBURSEMENT, COLLECTION, and BORROWER users
+- Borrower onboarding, document upload, and loan application flow
+- Loan lifecycle support for applied, sanctioned, disbursed, closed, and rejected states
+- OTP-based verification and secure JWT authentication
+- Dashboard analytics, tables, filters, pagination, export, and review flows
+- Cloudinary or local file upload support
+- Docker, Vercel, and Render deployment configuration
 
 ## Tech Stack
 
-- Frontend: Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Zustand, React Hook Form, Zod, Axios
-- Backend: Node.js, Express.js, TypeScript, MongoDB, Mongoose, JWT, bcrypt, Multer, Cloudinary
-- Deployment: Vercel for web, Render/Railway for API, MongoDB Atlas for database
+- Frontend: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Zustand, React Hook Form, Zod
+- Backend: Node.js, Express.js, TypeScript, MongoDB, Mongoose, JWT, Multer, Cloudinary
+- Tooling: Docker, ESLint, Prettier, npm workspaces
 
 ## Project Structure
 
-- `apps/web` - frontend application
-- `apps/api` - backend application
-- `shared` - shared pure business logic
+- `apps/web` - Next.js frontend application
+- `apps/api` - Express API application
+- `shared` - shared business logic and utilities
 
-## Setup
+## Prerequisites
 
-1. Install dependencies at the repository root.
-2. Create the root environment file by copying `.env.example` to `.env`.
-3. Fill in the values in `.env`, especially MongoDB, JWT, email, and SMS settings.
-4. If you prefer per-app env files, copy `apps/api/.env.example` and `apps/web/.env.example` too.
-5. Start MongoDB locally or use MongoDB Atlas.
-6. Run the web and API apps.
+- Node.js 20 or later
+- npm 10 or later
+- MongoDB Atlas or a local MongoDB instance
+- Optional: Cloudinary, SMTP, and Twilio credentials for full production functionality
 
-### How to create the `.env` file
+## Local Setup
 
-1. Copy the sample file:
+1. Install dependencies from the repository root.
+2. Copy `.env.example` to `.env`.
+3. Fill in the required values for MongoDB, JWT secrets, email, and API URLs.
+4. If needed, copy `apps/api/.env.example` and `apps/web/.env.example` for app-specific references.
+5. Start the frontend and backend locally.
 
-```bash
-cp .env.example .env
-```
-
-2. Open `.env` and set these values:
-	- `MONGODB_URI`
-	- `JWT_ACCESS_SECRET`
-	- `JWT_REFRESH_SECRET`
-	- `CLIENT_ORIGIN`
-	- `CORS_ORIGINS`
-	- `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_FROM`
-	- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`
-
-3. Save the file and restart the API server.
-
-### Install
+### Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Run locally
+### Run in Development
 
 ```bash
 npm run dev:web
 npm run dev:api
 ```
 
-### Build
+### Build for Production
 
 ```bash
 npm run build
 ```
 
-### Seed demo data
+### Seed Demo Data
 
 ```bash
 npm run seed
@@ -81,107 +71,88 @@ npm run seed
 
 ## Environment Variables
 
-Use the root `.env.example` as the canonical sample. Important variables:
+Use `.env.example` as the source of truth for required configuration.
+
+### Backend Variables
 
 - `MONGODB_URI`
 - `JWT_ACCESS_SECRET`
 - `JWT_REFRESH_SECRET`
+- `JWT_ACCESS_EXPIRES_IN`
+- `JWT_REFRESH_EXPIRES_IN`
 - `CLIENT_ORIGIN`
 - `CORS_ORIGINS`
+- `SERVER_ORIGIN`
+- `COOKIE_SECURE`
+- `CLOUDINARY_CLOUD_NAME`
+- `CLOUDINARY_API_KEY`
+- `CLOUDINARY_API_SECRET`
+- `EMAIL_USER`
+- `EMAIL_PASS`
+- `EMAIL_HOST`
+- `EMAIL_PORT`
+- `EMAIL_FROM`
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_USER`
+- `SMTP_PASS`
+- `SMTP_FROM`
+- `TWILIO_ACCOUNT_SID`
+- `TWILIO_AUTH_TOKEN`
+- `TWILIO_OTP_CONTENT_SID`
+- `TWILIO_FROM_NUMBER`
+- `TWILIO_MESSAGING_SERVICE_SID`
+- `TWILIO_WEBHOOK_AUTH_TOKEN`
+- `EXTERNAL_WEBHOOK_URL`
+- `WIREWEB_WEBHOOK_TOKEN`
+- `LOCAL_UPLOAD_DIR`
+
+### Frontend Variables
+
 - `NEXT_PUBLIC_API_URL`
+- `NEXT_PUBLIC_APP_NAME`
 - `NEXT_PUBLIC_SITE_URL`
-- `CLOUDINARY_*`
-- `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_FROM`
-- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`
-- `SMTP_*`
-
-## API Documentation
-
-### Auth
-
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/auth/refresh`
-- `POST /api/auth/logout`
-- `POST /api/auth/forgot-password`
-- `POST /api/auth/reset-password`
-- `POST /api/auth/secondary-email/start`
-- `POST /api/auth/secondary-email/verify`
-- `GET /api/auth/me`
-
-### Borrower
-
-- `POST /api/borrower/profile`
-- `POST /api/borrower/upload`
-- `POST /api/borrower/apply-loan`
-- `GET /api/borrower/my-loans`
-
-### Loans
-
-- `GET /api/loans`
-- `GET /api/loans/:id`
-- `PATCH /api/loans/:id/sanction`
-- `PATCH /api/loans/:id/reject`
-- `PATCH /api/loans/:id/disburse`
-- `PATCH /api/loans/:id/close`
-
-### Payments
-
-- `POST /api/payments`
-- `GET /api/payments/:loanId`
-
-### Dashboard
-
-- `GET /api/dashboard/stats`
-- `GET /api/dashboard/recent-loans`
-
-## Demo Credentials
-
-- Admin: `admin@lms.com` / `Admin@123`
-- Sales: `sales@lms.com` / `Sales@123`
-- Sanction: `sanction@lms.com` / `Sanction@123`
-- Disbursement: `disbursement@lms.com` / `Disbursement@123`
-- Collection: `collection@lms.com` / `Collection@123`
-- Borrower: `borrower@lms.com` / `Borrower@123`
+- `NEXT_PUBLIC_ENABLE_AUTO_REFRESH`
 
 ## Deployment
 
-### Frontend
+### Frontend Deployment: Vercel
 
-- Deploy `apps/web` to Vercel.
-- Set `NEXT_PUBLIC_API_URL` to the Render/Railway API URL.
+Deploy `apps/web` to Vercel and set:
 
-### Backend
+- `NEXT_PUBLIC_API_URL` to your production API URL
+- `NEXT_PUBLIC_SITE_URL` to your Vercel domain
 
-- Deploy `apps/api` to Render or Railway.
-- Set MongoDB Atlas, JWT secrets, client origin, CORS origins, and SMTP values.
+### Backend Deployment: Render
+
+Deploy `apps/api` to Render and configure:
+
+- `MONGODB_URI` from MongoDB Atlas
+- `JWT_ACCESS_SECRET` and `JWT_REFRESH_SECRET`
+- `CLIENT_ORIGIN` and `CORS_ORIGINS` to your frontend domain
+- Email, Cloudinary, and Twilio variables as required
 
 ### Docker
 
-- Build and run the full stack with `docker-compose.yml`.
+Use `docker-compose.yml` to run the full stack locally with MongoDB, API, and web services.
+
+## Demo Credentials
+
+The repository includes seed data support for local demonstration and testing. Check `apps/api/src/scripts/seed.ts` for the current seeded accounts and roles.
+
+## API Notes
+
+The backend exposes authentication, borrower, loan, payment, dashboard, admin, and webhook routes under `/api`.
 
 ## Screenshots
 
-Add screenshots of the landing page, borrower wizard, and dashboards here after final visual QA.
+Add final screenshots of the landing page, borrower flow, and dashboards here after UI review.
 
-## SMS OTP configuration (Twilio)
+## Author
 
-Add these environment variables to `apps/api/.env` or your deployment environment and restart the API:
+Angothu Adhisheshu
 
-- `TWILIO_ACCOUNT_SID` — Twilio Account SID.
-- `TWILIO_AUTH_TOKEN` — Twilio Auth Token.
-- `TWILIO_FROM_NUMBER` — Twilio sender number, or set `TWILIO_MESSAGING_SERVICE_SID` instead.
-- `TWILIO_MESSAGING_SERVICE_SID` — Optional Twilio messaging service SID.
+## License
 
-To test the repo's OTP endpoint locally:
-
-```powershell
-$body = @{
-  phone = "917702603872"
-} | ConvertTo-Json
-
-Invoke-RestMethod -Uri "http://localhost:5000/api/debug/send-otp" -Method Post -ContentType "application/json" -Body $body
-```
-
-If you see Twilio errors, check the JSON response and confirm the sender number or messaging service SID is configured.
+MIT explicit license is included in this repository. Add one before public distribution if needed.
 
