@@ -1,188 +1,502 @@
-
 # Loan Management System
 
-A production-ready loan management system with a modern fintech landing page, borrower onboarding flow, and role-based executive dashboards.
+A production-ready Loan Management System with a modern fintech landing page, borrower onboarding workflow, and role-based executive dashboards.
 
-# Youtube demo link: https://www.youtube.com/watch?v=JQ278W8h_MQ 
+## 📺 Demo Video
 
-## Features
+https://www.youtube.com/watch?v=JQ278W8h_MQ
 
-- Next.js 15 App Router frontend with Tailwind CSS, Framer Motion, and reusable UI components
-- Express.js + TypeScript REST API with JWT auth, bcrypt, RBAC, and Mongoose
-- MongoDB-backed borrower profiles, loans, documents, payments, notifications, and refresh sessions
-- BRE validation on the backend and mirrored frontend UX validation
-- Loan lifecycle support: APPLIED → SANCTIONED → DISBURSED → CLOSED, plus REJECTED
-- Email OTP verification for registration and login
-- Salary slip upload with Cloudinary or local storage fallback
-- Dashboard analytics with tables, charts, filters, search, pagination, export, and modals
-- Docker, CI, Vercel, and Render-ready configuration
+---
 
-## Tech Stack
+# 🚀 Features
 
-- Frontend: Next.js 15, TypeScript, Tailwind CSS, Framer Motion, Zustand, React Hook Form, Zod, Axios
-- Backend: Node.js, Express.js, TypeScript, MongoDB, Mongoose, JWT, bcrypt, Multer, Cloudinary
-- Deployment: Vercel for web, Render/Railway for API, MongoDB Atlas for database
+## Frontend
+- Next.js 15 App Router
+- TypeScript
+- Tailwind CSS
+- Framer Motion animations
+- Zustand state management
+- React Hook Form + Zod validation
+- Responsive fintech UI
+- Reusable component architecture
 
-## Project Structure
+## Backend
+- Express.js + TypeScript REST API
+- JWT Authentication
+- bcrypt password hashing
+- Role-Based Access Control (RBAC)
+- MongoDB + Mongoose
+- Multer file uploads
+- Cloudinary integration
+- OTP verification support
 
-- `apps/web` - frontend application
-- `apps/api` - backend application
-- `shared` - shared pure business logic
+## Business Features
+- Borrower onboarding flow
+- BRE validation engine
+- Salary slip uploads
+- Loan lifecycle management
+- Payment collection tracking
+- Dashboard analytics
+- Search, filters, pagination, exports
+- Executive role dashboards
 
-## Setup
+## Loan Lifecycle
 
-1. Install dependencies at the repository root.
-2. Create the root environment file by copying `.env.example` to `.env`.
-3. Fill in the values in `.env`, especially MongoDB, JWT, email, and SMS settings.
-4. If you prefer per-app env files, copy `apps/api/.env.example` and `apps/web/.env.example` too.
-5. Start MongoDB locally or use MongoDB Atlas.
-6. Run the web and API apps.
-
-### How to create the `.env` file
-
-1. Copy the sample file:
-
-```bash
-cp .env.example .env
+```txt
+APPLIED
+   ↓
+SANCTIONED
+   ↓
+DISBURSED
+   ↓
+CLOSED
 ```
 
-2. Open `.env` and set these values:
-	- `MONGODB_URI`
-	- `JWT_ACCESS_SECRET`
-	- `JWT_REFRESH_SECRET`
-	- `CLIENT_ORIGIN`
-	- `CORS_ORIGINS`
-	- `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_FROM`
-	- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`
+Rejected applications move to:
 
-3. Save the file and restart the API server.
+```txt
+REJECTED
+```
 
-### Install
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+- Next.js 15
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Zustand
+- Axios
+- React Hook Form
+- Zod
+
+## Backend
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- Multer
+- Cloudinary
+
+## Deployment
+- Vercel (Frontend)
+- Render/Railway (Backend)
+- MongoDB Atlas (Database)
+
+---
+
+# 📁 Project Structure
+
+```bash
+apps/
+ ├── web/        # Frontend application
+ ├── api/        # Backend application
+
+shared/          # Shared business logic and utilities
+```
+
+---
+
+# ⚙️ Setup Instructions
+
+## 1. Clone Repository
+
+```bash
+git clone https://github.com/Adhisheshu1210/Loan-Management-System.git
+cd Loan-Management-System
+```
+
+---
+
+## 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Run locally
+---
+
+## 3. Create Environment File
+
+```bash
+cp .env.example .env
+```
+
+---
+
+# 🔑 Environment Variables
+
+## Backend Variables
+
+```env
+MONGODB_URI=
+
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+JWT_ACCESS_EXPIRES_IN=15m
+JWT_REFRESH_EXPIRES_IN=7d
+
+CLIENT_ORIGIN=
+CORS_ORIGINS=
+SERVER_ORIGIN=
+
+COOKIE_SECURE=false
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+EMAIL_USER=
+EMAIL_PASS=
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_FROM=
+
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASS=
+SMTP_FROM=
+
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
+TWILIO_MESSAGING_SERVICE_SID=
+
+LOCAL_UPLOAD_DIR=uploads
+```
+
+---
+
+## Frontend Variables
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_APP_NAME=Loan Management System
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_ENABLE_AUTO_REFRESH=true
+```
+
+---
+
+# ▶️ Run Locally
+
+## Start Frontend
 
 ```bash
 npm run dev:web
+```
+
+## Start Backend
+
+```bash
 npm run dev:api
 ```
 
-### Build
+---
+
+# 🏗️ Build for Production
 
 ```bash
 npm run build
 ```
 
-### Seed demo data
+---
+
+# 🌱 Seed Demo Data
 
 ```bash
 npm run seed
 ```
 
-## Environment Variables
+---
 
-Use the root `.env.example` as the canonical sample. Important variables:
+# 👤 Demo Credentials
 
-- `MONGODB_URI`
-- `JWT_ACCESS_SECRET`
-- `JWT_REFRESH_SECRET`
-- `CLIENT_ORIGIN`
-- `CORS_ORIGINS`
-- `NEXT_PUBLIC_API_URL`
-- `NEXT_PUBLIC_SITE_URL`
-- `CLOUDINARY_*`
-- `EMAIL_USER`, `EMAIL_PASS`, `EMAIL_HOST`, `EMAIL_PORT`, `EMAIL_FROM`
-- `TWILIO_ACCOUNT_SID`, `TWILIO_AUTH_TOKEN`, `TWILIO_FROM_NUMBER`
-- `SMTP_*`
+## Admin
 
-## API Documentation
+```txt
+Email: admin@lms.com
+Password: Admin@123
+```
 
-### Auth
+## Sales
 
-- `POST /api/auth/register`
-- `POST /api/auth/login`
-- `POST /api/auth/refresh`
-- `POST /api/auth/logout`
-- `POST /api/auth/forgot-password`
-- `POST /api/auth/reset-password`
-- `POST /api/auth/secondary-email/start`
-- `POST /api/auth/secondary-email/verify`
-- `GET /api/auth/me`
+```txt
+Email: sales@lms.com
+Password: Sales@123
+```
 
-### Borrower
+## Sanction
 
-- `POST /api/borrower/profile`
-- `POST /api/borrower/upload`
-- `POST /api/borrower/apply-loan`
-- `GET /api/borrower/my-loans`
+```txt
+Email: sanction@lms.com
+Password: Sanction@123
+```
 
-### Loans
+## Disbursement
 
-- `GET /api/loans`
-- `GET /api/loans/:id`
-- `PATCH /api/loans/:id/sanction`
-- `PATCH /api/loans/:id/reject`
-- `PATCH /api/loans/:id/disburse`
-- `PATCH /api/loans/:id/close`
+```txt
+Email: disbursement@lms.com
+Password: Disbursement@123
+```
 
-### Payments
+## Collection
 
-- `POST /api/payments`
-- `GET /api/payments/:loanId`
+```txt
+Email: collection@lms.com
+Password: Collection@123
+```
 
-### Dashboard
+## Borrower
 
-- `GET /api/dashboard/stats`
-- `GET /api/dashboard/recent-loans`
+```txt
+Email: borrower@lms.com
+Password: Borrower@123
+```
 
-## Demo Credentials
+---
 
-- Admin: `admin@lms.com` / `Admin@123`
-- Sales: `sales@lms.com` / `Sales@123`
-- Sanction: `sanction@lms.com` / `Sanction@123`
-- Disbursement: `disbursement@lms.com` / `Disbursement@123`
-- Collection: `collection@lms.com` / `Collection@123`
-- Borrower: `borrower@lms.com` / `Borrower@123`
+# 🧾 BRE Rules
 
-## Deployment
+Loan applications are rejected if:
 
-### Frontend
+- Age is below 23 or above 50
+- Salary is below ₹25,000
+- PAN format is invalid
+- Employment status is unemployed
 
-- Deploy `apps/web` to Vercel.
-- Set `NEXT_PUBLIC_API_URL` to the Render/Railway API URL.
+## PAN Regex
 
-### Backend
+```regex
+^[A-Z]{5}[0-9]{4}[A-Z]{1}$
+```
 
-- Deploy `apps/api` to Render or Railway.
-- Set MongoDB Atlas, JWT secrets, client origin, CORS origins, and SMTP values.
+---
 
-### Docker
+# 📡 API Documentation
 
-- Build and run the full stack with `docker-compose.yml`.
+## Auth APIs
 
-## Screenshots
+```http
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/refresh
+POST /api/auth/logout
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+POST /api/auth/secondary-email/start
+POST /api/auth/secondary-email/verify
+GET  /api/auth/me
+```
 
-Add screenshots of the landing page, borrower wizard, and dashboards here after final visual QA.
+---
 
-## SMS OTP configuration (Twilio)
+## Borrower APIs
 
-Add these environment variables to `apps/api/.env` or your deployment environment and restart the API:
+```http
+POST /api/borrower/profile
+POST /api/borrower/upload
+POST /api/borrower/apply-loan
+GET  /api/borrower/my-loans
+```
 
-- `TWILIO_ACCOUNT_SID` — Twilio Account SID.
-- `TWILIO_AUTH_TOKEN` — Twilio Auth Token.
-- `TWILIO_FROM_NUMBER` — Twilio sender number, or set `TWILIO_MESSAGING_SERVICE_SID` instead.
-- `TWILIO_MESSAGING_SERVICE_SID` — Optional Twilio messaging service SID.
+---
 
+## Loan APIs
 
-# Author
+```http
+GET    /api/loans
+GET    /api/loans/:id
+PATCH  /api/loans/:id/sanction
+PATCH  /api/loans/:id/reject
+PATCH  /api/loans/:id/disburse
+PATCH  /api/loans/:id/close
+```
+
+---
+
+## Payment APIs
+
+```http
+POST /api/payments
+GET  /api/payments/:loanId
+```
+
+---
+
+## Dashboard APIs
+
+```http
+GET /api/dashboard/stats
+GET /api/dashboard/recent-loans
+```
+
+---
+
+# 🐳 Docker Setup
+
+## Start Full Stack
+
+```bash
+docker-compose up --build
+```
+
+---
+
+# 🚀 Deployment
+
+## Frontend Deployment (Vercel)
+
+Deploy `apps/web` and configure:
+
+```env
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_SITE_URL=
+```
+
+---
+
+## Backend Deployment (Render/Railway)
+
+Deploy `apps/api` and configure:
+
+```env
+MONGODB_URI=
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+CLIENT_ORIGIN=
+CORS_ORIGINS=
+```
+
+---
+
+# 🔐 Security Features
+
+- JWT Authentication
+- Refresh Token Rotation
+- Password Hashing
+- RBAC Authorization
+- Secure Cookies
+- Helmet Protection
+- CORS Protection
+- Input Validation
+- MongoDB Injection Prevention
+- XSS Protection
+- API Rate Limiting
+
+---
+
+# 🎨 UI Features
+
+- Modern Fintech Landing Page
+- Dark/Light Theme
+- Responsive Design
+- Animated UI
+- Dashboard Analytics
+- Charts and Graphs
+- Data Tables
+- Filters and Search
+- Toast Notifications
+- Skeleton Loaders
+- Modal Dialogs
+
+---
+
+# 📱 SMS OTP Configuration (Twilio)
+
+Add these variables to `apps/api/.env`:
+
+```env
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
+TWILIO_MESSAGING_SERVICE_SID=
+```
+
+Restart the API server after updating environment variables.
+
+---
+
+# 📸 Screenshots
+
+Add screenshots here:
+- Landing Page
+- Borrower Workflow
+- Admin Dashboard
+- Executive Modules
+- Loan Analytics
+
+---
+
+# 👨‍💻 Author
 
 Angothu Adhisheshu
 
-# License
+GitHub:
+https://github.com/Adhisheshu1210
+
+---
+
+# 📄 License
 
 This project is for educational and assessment purposes.
 
-Added an MIT License for public distribution.
+MIT License added for public distribution.
+
+---
+
+# ✅ GitHub Actions Fix
+
+Your GitHub Actions warning is because Node.js 20 actions are deprecated.
+
+Update your workflow file:
+
+```yaml
+uses: actions/setup-node@v4
+with:
+  node-version: 22
+```
+
+Also add:
+
+```yaml
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+```
+
+---
+
+# ✅ Lint Fix
+
+Run:
+
+```bash
+npm run lint
+```
+
+Fix:
+- unused imports
+- TypeScript `any` types
+- missing dependencies in hooks
+- formatting issues
+
+Then run:
+
+```bash
+npm run format
+```
+
+Commit again:
+
+```bash
+git add .
+git commit -m "fix: resolved lint and github actions issues"
+git push
+```
