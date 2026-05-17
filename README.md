@@ -1,158 +1,361 @@
 # Loan Management System
 
-A production-ready loan management platform with a modern Next.js frontend, a TypeScript Express API, and shared business logic for loan workflows, borrower onboarding, OTP verification, and executive dashboards.
+A production-ready Loan Management System built with a modern fintech UI, scalable monorepo architecture, and secure role-based workflows for borrowers and internal loan operations teams.
 
-## Overview
+This platform enables borrowers to apply for loans online while internal executives manage the complete loan lifecycle from application to repayment and closure.
 
-This repository contains a monorepo-based loan management system designed for small to medium lending operations. It includes a public landing page, role-based dashboards, borrower workflows, loan lifecycle management, payment tracking, and deployment-ready configuration for Vercel and Render.
+---
 
-## Key Features
+# Features
 
-- Modern landing page and authenticated dashboard experiences
-- Role-based access control for ADMIN, SALES, SANCTION, DISBURSEMENT, COLLECTION, and BORROWER users
-- Borrower onboarding, document upload, and loan application flow
-- Loan lifecycle support for applied, sanctioned, disbursed, closed, and rejected states
-- OTP-based verification and secure JWT authentication
-- Dashboard analytics, tables, filters, pagination, export, and review flows
-- Cloudinary or local file upload support
-- Docker, Vercel, and Render deployment configuration
+## Borrower Portal
+- User registration and login
+- JWT authentication with refresh tokens
+- OTP verification support
+- Multi-step borrower onboarding flow
+- Business Rule Engine (BRE) eligibility validation
+- Salary slip upload (PDF/JPG/PNG)
+- Loan application with live interest calculation
+- Loan tracking dashboard
+- Responsive borrower experience
 
-## Tech Stack
+## Executive Dashboard
 
-- Frontend: Next.js, React, TypeScript, Tailwind CSS, Framer Motion, Zustand, React Hook Form, Zod
-- Backend: Node.js, Express.js, TypeScript, MongoDB, Mongoose, JWT, Multer, Cloudinary
-- Tooling: Docker, ESLint, Prettier, npm workspaces
+##Role-based dashboard modules for:
+- ADMIN
+- SALES
+- SANCTION
+- DISBURSEMENT
+- COLLECTION
 
-## Project Structure
+## Features include:
 
-- `apps/web` - Next.js frontend application
-- `apps/api` - Express API application
-- `shared` - shared business logic and utilities
+- Loan review workflows
+- Approval and rejection management
+- Disbursement processing
+- Payment collection
+- Outstanding balance tracking
+- Dashboard analytics
+- Search, filters, pagination, and exports
 
-## Prerequisites
+## Loan Lifecycle
 
-- Node.js 20 or later
-- npm 10 or later
-- MongoDB Atlas or a local MongoDB instance
-- Optional: Cloudinary, SMTP, and Twilio credentials for full production functionality
+Supported statuses:
+- APPLIED
+- SANCTIONED
+- DISBURSED
+- CLOSED
+- REJECTED
 
-## Local Setup
+## Security
+- JWT authentication
+- bcrypt password hashing
+- Role-Based Access Control (RBAC)
+- Protected API routes
+- Helmet security middleware
+- Rate limiting
+- Input validation and sanitization
+- Secure file upload handling
 
-1. Install dependencies from the repository root.
-2. Copy `.env.example` to `.env`.
-3. Fill in the required values for MongoDB, JWT secrets, email, and API URLs.
-4. If needed, copy `apps/api/.env.example` and `apps/web/.env.example` for app-specific references.
-5. Start the frontend and backend locally.
+## Deployment Ready
+- Vercel frontend deployment
+- Render/Railway backend deployment
+- MongoDB Atlas integration
+- Docker and Docker Compose support
+- CI/CD ready structure
 
-### Install Dependencies
+---
+
+# Tech Stack
+
+## Frontend
+- Next.js 15 (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Zustand
+- React Hook Form
+- Zod
+- Axios
+- ShadCN UI
+
+## Backend
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- Multer
+- Cloudinary
+
+## DevOps & Tooling
+- Docker
+- Docker Compose
+- ESLint
+- Prettier
+- npm Workspaces
+
+---
+
+# Project Structure
 
 ```bash
+loan-management-system/
+│
+├── apps/
+│   ├── web/                  # Next.js frontend
+│   └── api/                  # Express backend
+│
+├── shared/                   # Shared business logic/types
+│
+├── docker-compose.yml
+├── package.json
+├── .env.example
+└── README.md
+```
+# Prerequisites
+
+## Before starting, ensure you have:
+
+Node.js 20+
+npm 10+
+MongoDB Atlas or local MongoDB
+Cloudinary account (optional)
+SMTP credentials (optional)
+Twilio credentials (optional)
+
+# Installation
+
+## Clone Repository
+
+git clone https://github.com/your-username/loan-management-system.git
+cd loan-management-system
+Install Dependencies
 npm install
-```
 
-### Run in Development
+## Environment Setup
 
-```bash
+Create a .env file from .env.example.
+
+cp .env.example .env
+
+#Environment Variables
+
+## Backend Variables
+
+MONGODB_URI=
+
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+JWT_ACCESS_EXPIRES_IN=15m
+JWT_REFRESH_EXPIRES_IN=7d
+
+CLIENT_ORIGIN=
+CORS_ORIGINS=
+SERVER_ORIGIN=
+
+COOKIE_SECURE=false
+
+CLOUDINARY_CLOUD_NAME=
+CLOUDINARY_API_KEY=
+CLOUDINARY_API_SECRET=
+
+EMAIL_USER=
+EMAIL_PASS=
+EMAIL_HOST=
+EMAIL_PORT=
+EMAIL_FROM=
+
+SMTP_HOST=
+SMTP_PORT=
+SMTP_USER=
+SMTP_PASS=
+SMTP_FROM=
+
+TWILIO_ACCOUNT_SID=
+TWILIO_AUTH_TOKEN=
+TWILIO_FROM_NUMBER=
+TWILIO_MESSAGING_SERVICE_SID=
+
+LOCAL_UPLOAD_DIR=uploads
+
+## Frontend Variables
+
+NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_APP_NAME=Loan Management System
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+NEXT_PUBLIC_ENABLE_AUTO_REFRESH=true
+
+Running the Project
+Start Frontend
 npm run dev:web
+Start Backend
 npm run dev:api
-```
-
-### Build for Production
-
-```bash
+Build for Production
 npm run build
-```
-
-### Seed Demo Data
-
-```bash
+Seed Demo Accounts
 npm run seed
-```
+Demo Credentials
+Admin
+Email: admin@lms.com
+Password: Admin@123
+Sales
+Email: sales@lms.com
+Password: Sales@123
+Sanction
+Email: sanction@lms.com
+Password: Sanction@123
+Disbursement
+Email: disbursement@lms.com
+Password: Disbursement@123
+Collection
+Email: collection@lms.com
+Password: Collection@123
+Borrower
+Email: borrower@lms.com
+Password: Borrower@123
+Borrower Workflow
+Register/Login
+Complete Personal Details
+BRE Eligibility Validation
+Upload Salary Slip
+Configure Loan
+Apply for Loan
+BRE Rules
 
-## Environment Variables
+# Loan application is rejected if:
 
-Use `.env.example` as the source of truth for required configuration.
+Age is below 23 or above 50
+Salary is below ₹25,000
+PAN format is invalid
+Employment status is unemployed
 
-### Backend Variables
+## PAN Regex:
 
-- `MONGODB_URI`
-- `JWT_ACCESS_SECRET`
-- `JWT_REFRESH_SECRET`
-- `JWT_ACCESS_EXPIRES_IN`
-- `JWT_REFRESH_EXPIRES_IN`
-- `CLIENT_ORIGIN`
-- `CORS_ORIGINS`
-- `SERVER_ORIGIN`
-- `COOKIE_SECURE`
-- `CLOUDINARY_CLOUD_NAME`
-- `CLOUDINARY_API_KEY`
-- `CLOUDINARY_API_SECRET`
-- `EMAIL_USER`
-- `EMAIL_PASS`
-- `EMAIL_HOST`
-- `EMAIL_PORT`
-- `EMAIL_FROM`
-- `SMTP_HOST`
-- `SMTP_PORT`
-- `SMTP_USER`
-- `SMTP_PASS`
-- `SMTP_FROM`
-- `TWILIO_ACCOUNT_SID`
-- `TWILIO_AUTH_TOKEN`
-- `TWILIO_OTP_CONTENT_SID`
-- `TWILIO_FROM_NUMBER`
-- `TWILIO_MESSAGING_SERVICE_SID`
-- `TWILIO_WEBHOOK_AUTH_TOKEN`
-- `EXTERNAL_WEBHOOK_URL`
-- `WIREWEB_WEBHOOK_TOKEN`
-- `LOCAL_UPLOAD_DIR`
+^[A-Z]{5}[0-9]{4}[A-Z]{1}$
 
-### Frontend Variables
+# Loan Lifecycle
 
-- `NEXT_PUBLIC_API_URL`
-- `NEXT_PUBLIC_APP_NAME`
-- `NEXT_PUBLIC_SITE_URL`
-- `NEXT_PUBLIC_ENABLE_AUTO_REFRESH`
+APPLIED
+   ↓
+SANCTIONED
+   ↓
+DISBURSED
+   ↓
+CLOSED
+
+# Rejected applications move to:
+
+## REJECTED
+
+API Documentation
+Auth APIs
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/refresh
+POST /api/auth/logout
+POST /api/auth/forgot-password
+POST /api/auth/reset-password
+GET  /api/auth/me
+
+## Borrower APIs
+
+POST /api/borrower/profile
+POST /api/borrower/upload
+POST /api/borrower/apply-loan
+GET  /api/borrower/my-loans
+
+## Loan APIs
+
+GET    /api/loans
+GET    /api/loans/:id
+PATCH  /api/loans/:id/sanction
+PATCH  /api/loans/:id/reject
+PATCH  /api/loans/:id/disburse
+PATCH  /api/loans/:id/close
+
+## Payment APIs
+
+POST /api/payments
+GET  /api/payments/:loanId
+
+## Dashboard APIs
+GET /api/dashboard/stats
+GET /api/dashboard/recent-loans
+
+## Docker Setup
+
+Start Full Stack
+docker-compose up --build
 
 ## Deployment
 
-### Frontend Deployment: Vercel
+Frontend Deployment (Vercel)
 
-Deploy `apps/web` to Vercel and set:
+# Deploy apps/web and configure:
 
-- `NEXT_PUBLIC_API_URL` to your production API URL
-- `NEXT_PUBLIC_SITE_URL` to your Vercel domain
+NEXT_PUBLIC_API_URL=
+NEXT_PUBLIC_SITE_URL=
+Backend Deployment (Render/Railway)
 
-### Backend Deployment: Render
+# Deploy apps/api and configure:
 
-Deploy `apps/api` to Render and configure:
+MONGODB_URI=
+JWT_ACCESS_SECRET=
+JWT_REFRESH_SECRET=
+CLIENT_ORIGIN=
+CORS_ORIGINS=
+Security Features
+JWT Authentication
+Refresh Token Rotation
+Password Hashing
+RBAC Authorization
+Secure Cookies
+Helmet Protection
+CORS Protection
+Input Validation
+MongoDB Injection Prevention
+XSS Protection
+API Rate Limiting
+UI Features
+Modern Fintech Landing Page
+Dark/Light Theme
+Responsive Design
+Animated UI
+Dashboard Analytics
+Charts and Graphs
+Data Tables
+Filters and Search
+Toast Notifications
+Skeleton Loaders
+Modal Dialogs
+Future Improvements
+AI Credit Scoring
+Real-time Notifications
+Razorpay/Stripe Integration
+Audit Logs
+Multi-language Support
+Mobile App
+WebSocket Updates
+Screenshots
 
-- `MONGODB_URI` from MongoDB Atlas
-- `JWT_ACCESS_SECRET` and `JWT_REFRESH_SECRET`
-- `CLIENT_ORIGIN` and `CORS_ORIGINS` to your frontend domain
-- Email, Cloudinary, and Twilio variables as required
+# Add screenshots here:
 
-### Docker
+Landing Page
+Borrower Flow
+Admin Dashboard
+Executive Modules
+Loan Analytics
 
-Use `docker-compose.yml` to run the full stack locally with MongoDB, API, and web services.
-
-## Demo Credentials
-
-The repository includes seed data support for local demonstration and testing. Check `apps/api/src/scripts/seed.ts` for the current seeded accounts and roles.
-
-## API Notes
-
-The backend exposes authentication, borrower, loan, payment, dashboard, admin, and webhook routes under `/api`.
-
-## Screenshots
-
-Add final screenshots of the landing page, borrower flow, and dashboards here after UI review.
-
-## Author
+# Author
 
 Angothu Adhisheshu
 
-## License
+# License
 
-MIT explicit license is included in this repository. Add one before public distribution if needed.
+This project is for educational and assessment purposes.
 
+Add an MIT License before public distribution if required.
