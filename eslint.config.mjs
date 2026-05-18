@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import tsParser from "@typescript-eslint/parser";
 import tseslint from "@typescript-eslint/eslint-plugin";
 
