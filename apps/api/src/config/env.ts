@@ -30,6 +30,8 @@ export const env = {
   CLOUDINARY_CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME ?? "",
   CLOUDINARY_API_KEY: process.env.CLOUDINARY_API_KEY ?? "",
   CLOUDINARY_API_SECRET: process.env.CLOUDINARY_API_SECRET ?? "",
+  RESEND_API_KEY: process.env.RESEND_API_KEY ?? "",
+  RESEND_FROM: process.env.RESEND_FROM ?? "",
   EMAIL_USER: process.env.EMAIL_USER ?? process.env.SMTP_USER ?? "",
   EMAIL_PASS: process.env.EMAIL_PASS ?? process.env.SMTP_PASS ?? "",
   EMAIL_HOST: process.env.EMAIL_HOST ?? process.env.SMTP_HOST ?? "smtp.gmail.com",
