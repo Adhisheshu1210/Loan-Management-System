@@ -80,7 +80,7 @@ export function ApplicationWizard() {
   const onAuthSubmit = authForm.handleSubmit(async (values) => {
     try {
       const email = values.email.trim().toLowerCase();
-      const fullName = values.fullName.trim();
+      const fullName = (values.fullName ?? "").trim();
       const phoneRaw = values.phone ?? "";
       const currentEmail = currentUser?.email?.trim().toLowerCase();
       const currentName = currentUser?.name?.trim() ?? "";
