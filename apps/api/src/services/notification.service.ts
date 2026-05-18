@@ -11,6 +11,32 @@ export async function createNotification(userId: string, title: string, message:
 }
 
 export async function sendMail(to: string, subject: string, text: string, options?: { replyTo?: string }) {
+  const from = env.RESEND_FROM || env.EMAIL_FROM || env.SMTP_FROM || "Loan Management System <no-reply@lms.com>";
+  if (env.RESEND_API_KEY) {
+    const response = await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${env.RESEND_API_KEY}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        from,
+        to,
+        subject,
+        text,
+        reply_to: options?.replyTo,
+      }),
+    });
+
+    if (!response.ok) {
+      const responseText = await response.text().catch(() => "");
+      console.error("[mail] resend failed", { to, subject, status: response.status, responseText });
+      throw new AppError(502, "Email delivery is temporarily unavailable");
+    }
+
+    return;
+  }
+
   const user = env.EMAIL_USER || env.SMTP_USER;
   const pass = env.EMAIL_PASS || env.SMTP_PASS;
   const host = env.EMAIL_HOST || env.SMTP_HOST || "smtp.gmail.com";
@@ -35,7 +61,11 @@ export async function sendMail(to: string, subject: string, text: string, option
   });
 
   try {
+<<<<<<< HEAD
     await transporter.sendMail({ from: env.EMAIL_FROM || env.SMTP_FROM, to, subject, text, replyTo: options?.replyTo });
+=======
+    await transporter.sendMail({ from, to, subject, text, replyTo: options?.replyTo });
+>>>>>>> 7178909 (fix: guard optional fullName before trim in application-wizard)
   } catch (error) {
     console.error("[mail] failed to send", { to, subject, host, port, error });
     throw new AppError(502, "Email delivery is temporarily unavailable");
