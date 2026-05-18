@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { api } from "../../../../services/api";
+import { api } from "@/services/api";
 
 export default function RoleDashboardRedirect() {
   const router = useRouter();

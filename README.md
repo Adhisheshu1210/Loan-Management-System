@@ -1,44 +1,92 @@
 # Loan Management System
 
-A production-ready Loan Management System with a modern fintech landing page, borrower onboarding workflow, and role-based executive dashboards.
+A production-ready loan management platform with a modern fintech landing page, borrower onboarding workflows, and role-based executive dashboards.
 
-## 📺 Demo Video
+## Demo
+
+Watch the product walkthrough on YouTube:
 
 https://www.youtube.com/watch?v=JQ278W8h_MQ
 
----
+## Highlights
 
-# 🚀 Features
+- Next.js 15 App Router frontend with a responsive fintech UI
+- Express.js + TypeScript REST API with JWT authentication and RBAC
+- Borrower onboarding, document upload, and loan application flows
+- Loan lifecycle management from application through closure
+- Payment collection tracking, dashboard analytics, filters, and exports
+- OTP verification support with email, SMS, and Twilio integration
+- Docker, Vercel, Render, and Railway deployment ready
 
-## Frontend
-- Next.js 15 App Router
+## Architecture
+
+This repository uses an npm workspaces monorepo:
+
+- `apps/web` for the customer-facing Next.js application
+- `apps/api` for the Express API and backend services
+- `shared` for business rules and utilities shared across apps
+
+## Tech Stack
+
+### Frontend
+
+- Next.js 15
+- React 19
 - TypeScript
 - Tailwind CSS
-- Framer Motion animations
-- Zustand state management
-- React Hook Form + Zod validation
-- Responsive fintech UI
+- Framer Motion
+- Zustand
+- React Hook Form
+- Zod
+- Axios
+
+### Backend
+
+- Node.js
+- Express.js
+- TypeScript
+- MongoDB
+- Mongoose
+- JWT
+- bcrypt
+- Multer
+- Cloudinary
+
+### Tooling
+
+- npm workspaces
+- ESLint
+- Prettier
+- Docker
+
+## Core Features
+
+### Frontend Experience
+
+- Modern fintech landing page
+- Borrower registration and login flows
+- Role-based navigation and dashboards
 - Reusable component architecture
+- Animated UI with Framer Motion
+- Dark and light theme support
 
-## Backend
-- Express.js + TypeScript REST API
-- JWT Authentication
-- bcrypt password hashing
-- Role-Based Access Control (RBAC)
-- MongoDB + Mongoose
-- Multer file uploads
-- Cloudinary integration
-- OTP verification support
+### Backend Capabilities
 
-## Business Features
-- Borrower onboarding flow
+- JWT access and refresh token authentication
+- Password hashing with bcrypt
+- Role-based access control for ADMIN, SALES, SANCTION, DISBURSEMENT, COLLECTION, and BORROWER
+- MongoDB-backed persistence with Mongoose models
+- File uploads via Multer and Cloudinary or local storage
+- OTP and verification workflows
+
+### Business Workflows
+
+- Borrower onboarding and profile management
 - BRE validation engine
-- Salary slip uploads
-- Loan lifecycle management
-- Payment collection tracking
-- Dashboard analytics
-- Search, filters, pagination, exports
-- Executive role dashboards
+- Salary slip and identity document uploads
+- Loan review, sanction, disbursement, and closure flows
+- Payment collection tracking and repayment views
+- Dashboard analytics, search, pagination, and exports
 
 ## Loan Lifecycle
 
@@ -58,81 +106,65 @@ Rejected applications move to:
 REJECTED
 ```
 
----
-
-# 🛠️ Tech Stack
-
-## Frontend
-- Next.js 15
-- React
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Zustand
-- Axios
-- React Hook Form
-- Zod
-
-## Backend
-- Node.js
-- Express.js
-- TypeScript
-- MongoDB
-- Mongoose
-- JWT
-- bcrypt
-- Multer
-- Cloudinary
-
-## Deployment
-- Vercel (Frontend)
-- Render/Railway (Backend)
-- MongoDB Atlas (Database)
-
----
-
-# 📁 Project Structure
+## Repository Structure
 
 ```bash
 apps/
- ├── web/        # Frontend application
- ├── api/        # Backend application
+├── api/   # Express API application
+└── web/   # Next.js frontend application
 
-shared/          # Shared business logic and utilities
+shared/    # Shared business logic and utilities
 ```
 
----
+## Prerequisites
 
-# ⚙️ Setup Instructions
+- Node.js 20 or later
+- npm 10 or later
+- MongoDB Atlas or a local MongoDB instance
+- Optional: Cloudinary, SMTP, and Twilio credentials for full production functionality
 
-## 1. Clone Repository
+## Quick Start
 
-```bash
-git clone https://github.com/Adhisheshu1210/Loan-Management-System.git
-cd Loan-Management-System
-```
-
----
-
-## 2. Install Dependencies
+### 1. Install dependencies
 
 ```bash
 npm install
 ```
 
----
+### 2. Create environment files
 
-## 3. Create Environment File
+Copy the root sample environment file and fill in the values required for your setup.
 
 ```bash
 cp .env.example .env
 ```
 
----
+If you prefer app-specific env files, you can also refer to the app-level examples where provided.
 
-# 🔑 Environment Variables
+### 3. Start the app locally
 
-## Backend Variables
+```bash
+npm run dev:web
+npm run dev:api
+```
+
+## Available Scripts
+
+Run these from the repository root:
+
+```bash
+npm run dev:web   # Start the web app
+npm run dev:api   # Start the API server
+npm run build     # Build web and API
+npm run lint      # Lint web and API
+npm run seed      # Seed demo data through the API workspace
+```
+
+## Environment Variables
+
+Use `.env.example` as the source of truth for required configuration.
+
+### Backend
 
 ```env
 MONGODB_URI=
@@ -172,9 +204,7 @@ TWILIO_MESSAGING_SERVICE_SID=
 LOCAL_UPLOAD_DIR=uploads
 ```
 
----
-
-## Frontend Variables
+### Frontend
 
 ```env
 NEXT_PUBLIC_API_URL=http://localhost:5000/api
@@ -183,106 +213,9 @@ NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_ENABLE_AUTO_REFRESH=true
 ```
 
----
+## API Surface
 
-# ▶️ Run Locally
-
-## Start Frontend
-
-```bash
-npm run dev:web
-```
-
-## Start Backend
-
-```bash
-npm run dev:api
-```
-
----
-
-# 🏗️ Build for Production
-
-```bash
-npm run build
-```
-
----
-
-# 🌱 Seed Demo Data
-
-```bash
-npm run seed
-```
-
----
-
-# 👤 Demo Credentials
-
-## Admin
-
-```txt
-Email: admin@lms.com
-Password: Admin@123
-```
-
-## Sales
-
-```txt
-Email: sales@lms.com
-Password: Sales@123
-```
-
-## Sanction
-
-```txt
-Email: sanction@lms.com
-Password: Sanction@123
-```
-
-## Disbursement
-
-```txt
-Email: disbursement@lms.com
-Password: Disbursement@123
-```
-
-## Collection
-
-```txt
-Email: collection@lms.com
-Password: Collection@123
-```
-
-## Borrower
-
-```txt
-Email: borrower@lms.com
-Password: Borrower@123
-```
-
----
-
-# 🧾 BRE Rules
-
-Loan applications are rejected if:
-
-- Age is below 23 or above 50
-- Salary is below ₹25,000
-- PAN format is invalid
-- Employment status is unemployed
-
-## PAN Regex
-
-```regex
-^[A-Z]{5}[0-9]{4}[A-Z]{1}$
-```
-
----
-
-# 📡 API Documentation
-
-## Auth APIs
+### Auth
 
 ```http
 POST /api/auth/register
@@ -296,9 +229,7 @@ POST /api/auth/secondary-email/verify
 GET  /api/auth/me
 ```
 
----
-
-## Borrower APIs
+### Borrower
 
 ```http
 POST /api/borrower/profile
@@ -307,9 +238,7 @@ POST /api/borrower/apply-loan
 GET  /api/borrower/my-loans
 ```
 
----
-
-## Loan APIs
+### Loans
 
 ```http
 GET    /api/loans
@@ -320,39 +249,57 @@ PATCH  /api/loans/:id/disburse
 PATCH  /api/loans/:id/close
 ```
 
----
-
-## Payment APIs
+### Payments
 
 ```http
 POST /api/payments
 GET  /api/payments/:loanId
 ```
 
----
-
-## Dashboard APIs
+### Dashboard
 
 ```http
 GET /api/dashboard/stats
 GET /api/dashboard/recent-loans
 ```
 
----
+## Demo Credentials
 
-# 🐳 Docker Setup
+These credentials are intended for local development and demos.
 
-## Start Full Stack
+- Admin: `admin@lms.com` / `Admin@123`
+- Sales: `sales@lms.com` / `Sales@123`
+- Sanction: `sanction@lms.com` / `Sanction@123`
+- Disbursement: `disbursement@lms.com` / `Disbursement@123`
+- Collection: `collection@lms.com` / `Collection@123`
+- Borrower: `borrower@lms.com` / `Borrower@123`
+
+## BRE Rules
+
+Loan applications are rejected if any of the following fail:
+
+- Age is below 23 or above 50
+- Salary is below ₹25,000
+- PAN format is invalid
+- Employment status is unemployed
+
+### PAN Regex
+
+```regex
+^[A-Z]{5}[0-9]{4}[A-Z]{1}$
+```
+
+## Docker
+
+Start the full stack locally with:
 
 ```bash
 docker-compose up --build
 ```
 
----
+## Deployment
 
-# 🚀 Deployment
-
-## Frontend Deployment (Vercel)
+### Frontend: Vercel
 
 Deploy `apps/web` and configure:
 
@@ -361,9 +308,7 @@ NEXT_PUBLIC_API_URL=
 NEXT_PUBLIC_SITE_URL=
 ```
 
----
-
-## Backend Deployment (Render/Railway)
+### Backend: Render or Railway
 
 Deploy `apps/api` and configure:
 
@@ -375,43 +320,13 @@ CLIENT_ORIGIN=
 CORS_ORIGINS=
 ```
 
----
+### Database: MongoDB Atlas
 
-# 🔐 Security Features
+Use MongoDB Atlas for managed production storage, or point `MONGODB_URI` to a trusted MongoDB deployment.
 
-- JWT Authentication
-- Refresh Token Rotation
-- Password Hashing
-- RBAC Authorization
-- Secure Cookies
-- Helmet Protection
-- CORS Protection
-- Input Validation
-- MongoDB Injection Prevention
-- XSS Protection
-- API Rate Limiting
+## SMS OTP Setup
 
----
-
-# 🎨 UI Features
-
-- Modern Fintech Landing Page
-- Dark/Light Theme
-- Responsive Design
-- Animated UI
-- Dashboard Analytics
-- Charts and Graphs
-- Data Tables
-- Filters and Search
-- Toast Notifications
-- Skeleton Loaders
-- Modal Dialogs
-
----
-
-# 📱 SMS OTP Configuration (Twilio)
-
-Add these variables to `apps/api/.env`:
+If you enable Twilio-based OTP delivery, add these variables to your API environment:
 
 ```env
 TWILIO_ACCOUNT_SID=
@@ -420,83 +335,24 @@ TWILIO_FROM_NUMBER=
 TWILIO_MESSAGING_SERVICE_SID=
 ```
 
-Restart the API server after updating environment variables.
+Restart the API server after updating the values.
 
----
+## Screenshots
 
-# 📸 Screenshots
+Add screenshots here as the UI is finalized:
 
-Add screenshots here:
-- Landing Page
-- Borrower Workflow
-- Admin Dashboard
-- Executive Modules
-- Loan Analytics
+- Landing page
+- Borrower onboarding flow
+- Admin dashboard
+- Executive dashboards
+- Loan analytics
 
----
-
-# 👨‍💻 Author
+## Author
 
 Angothu Adhisheshu
 
-GitHub:
-https://github.com/Adhisheshu1210
+GitHub: https://github.com/Adhisheshu1210
 
----
+## License
 
-# 📄 License
-
-This project is for educational and assessment purposes.
-
-MIT License added for public distribution.
-
----
-
-# ✅ GitHub Actions Fix
-
-Your GitHub Actions warning is because Node.js 20 actions are deprecated.
-
-Update your workflow file:
-
-```yaml
-uses: actions/setup-node@v4
-with:
-  node-version: 22
-```
-
-Also add:
-
-```yaml
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-```
-
----
-
-# ✅ Lint Fix
-
-Run:
-
-```bash
-npm run lint
-```
-
-Fix:
-- unused imports
-- TypeScript `any` types
-- missing dependencies in hooks
-- formatting issues
-
-Then run:
-
-```bash
-npm run format
-```
-
-Commit again:
-
-```bash
-git add .
-git commit -m "fix: resolved lint and github actions issues"
-git push
-```
+MIT License. See [LICENSE](LICENSE) for the full text.
