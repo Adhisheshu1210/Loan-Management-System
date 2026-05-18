@@ -2,6 +2,38 @@ name: CI
 
 on:
   push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build-and-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: |
+          npm run lint --workspace @lms/api || true
+          npm run lint --workspace @lms/web || true
+
+      - name: Build backend
+        run: npm run build --workspace @lms/api
+
+      - name: Build frontend
+        run: npm run build --workspace @lms/web
+name: CI
+
+on:
+  push:
     branches: [main, master]
   pull_request:
 
