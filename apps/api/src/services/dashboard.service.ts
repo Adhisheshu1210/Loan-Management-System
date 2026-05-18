@@ -395,7 +395,7 @@ export async function listSanctionHistory(input: { page?: number; limit?: number
     },
   );
 
-  const countPipeline = [
+  const countPipeline: any[] = [
     { $unwind: "$history" },
     { $match: { $or: [{ "history.action": "SANCTION" }, { "history.action": "REJECT" }] } },
   ];
@@ -883,10 +883,11 @@ export async function getLoanTimeline(loanId: string) {
   }
 
   for (const payment of payments) {
+    const collectedBy = payment.collectedBy as { name?: string; email?: string } | null | undefined;
     events.push({
       at: new Date(payment.paymentDate).toISOString(),
       type: "PAYMENT_RECORDED",
-      actor: (payment.collectedBy as any)?.email ? `${(payment.collectedBy as any)?.name ?? payment.collectedBy.email} <${(payment.collectedBy as any)?.email}>` : (payment.collectedBy as any)?.name ?? "Collection Executive",
+      actor: collectedBy?.email ? `${collectedBy.name ?? collectedBy.email} <${collectedBy.email}>` : collectedBy?.name ?? "Collection Executive",
       amount: payment.amount,
       utrNumber: payment.utrNumber,
       status: loan.status,
@@ -1592,3 +1593,5 @@ export async function listAdminLoans(input: { page?: number; limit?: number; sta
     limit,
   };
 }
+
+
