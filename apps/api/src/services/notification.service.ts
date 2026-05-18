@@ -61,11 +61,7 @@ export async function sendMail(to: string, subject: string, text: string, option
   });
 
   try {
-<<<<<<< HEAD
-    await transporter.sendMail({ from: env.EMAIL_FROM || env.SMTP_FROM, to, subject, text, replyTo: options?.replyTo });
-=======
     await transporter.sendMail({ from, to, subject, text, replyTo: options?.replyTo });
->>>>>>> 7178909 (fix: guard optional fullName before trim in application-wizard)
   } catch (error) {
     console.error("[mail] failed to send", { to, subject, host, port, error });
     throw new AppError(502, "Email delivery is temporarily unavailable");
