@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function resolveFileUrl(fileUrl?: string | null) {
-  if (!fileUrl) return fileUrl ?? null;
+export function resolveFileUrl(fileUrl?: string | null): string | undefined {
+  if (!fileUrl) return undefined;
   try {
     const parsed = new URL(fileUrl);
     // absolute URL already
