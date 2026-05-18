@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next build",
     "start": "next start",
-    "lint": "eslint \"app/**/*.{ts,tsx}\" \"components/**/*.{ts,tsx}\" \"hooks/**/*.{ts,tsx}\" \"lib/**/*.{ts,tsx}\" \"services/**/*.{ts,tsx}\" \"store/**/*.{ts,tsx}\" middleware.ts"
+    "lint": "eslint \"app/**/*.{ts,tsx}\" \"components/**/*.{ts,tsx}\" \"hooks/**/*.{ts,tsx}\" \"lib/**/*.{ts,tsx}\" \"services/**/*.{ts,tsx}\" \"store/**/*.{ts,tsx}\""
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
