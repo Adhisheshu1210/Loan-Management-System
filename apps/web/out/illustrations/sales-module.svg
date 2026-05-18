@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="640" y2="360" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#f59e0b"/>
+      <stop offset="1" stop-color="#ef4444"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="360" rx="24" fill="url(#g1)"/>
+  <circle cx="130" cy="110" r="42" fill="white" fill-opacity="0.25"/>
+  <circle cx="220" cy="170" r="24" fill="white" fill-opacity="0.3"/>
+  <rect x="80" y="210" width="480" height="98" rx="14" fill="white" fill-opacity="0.2"/>
+  <rect x="110" y="236" width="180" height="14" rx="7" fill="white"/>
+  <rect x="110" y="260" width="120" height="10" rx="5" fill="#fff7ed"/>
+  <rect x="330" y="236" width="190" height="14" rx="7" fill="white"/>
+  <rect x="330" y="260" width="130" height="10" rx="5" fill="#fff7ed"/>
+  <text x="80" y="70" fill="white" font-size="32" font-family="Verdana" font-weight="700">Sales Leads</text>
+</svg>
