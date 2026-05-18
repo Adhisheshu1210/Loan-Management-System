@@ -27,6 +27,8 @@ export async function sendMail(to: string, subject: string, text: string, option
     port,
     secure: port === 465,
     auth: { user, pass },
+    family: 4,
+    requireTLS: port !== 465,
     connectionTimeout: timeoutMs,
     greetingTimeout: timeoutMs,
     socketTimeout: timeoutMs,
