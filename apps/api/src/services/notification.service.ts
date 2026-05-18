@@ -15,6 +15,7 @@ export async function sendMail(to: string, subject: string, text: string, option
   const pass = env.EMAIL_PASS || env.SMTP_PASS;
   const host = env.EMAIL_HOST || env.SMTP_HOST || "smtp.gmail.com";
   const port = env.EMAIL_PORT || env.SMTP_PORT || 587;
+  const timeoutMs = Number(process.env.EMAIL_TIMEOUT_MS ?? 10000);
 
   if (!host || !user || !pass) {
     console.log(`[mail] ${to}: ${subject} - ${text}`);
@@ -26,9 +27,17 @@ export async function sendMail(to: string, subject: string, text: string, option
     port,
     secure: port === 465,
     auth: { user, pass },
+    connectionTimeout: timeoutMs,
+    greetingTimeout: timeoutMs,
+    socketTimeout: timeoutMs,
   });
 
-  await transporter.sendMail({ from: env.EMAIL_FROM || env.SMTP_FROM, to, subject, text, replyTo: options?.replyTo });
+  try {
+    await transporter.sendMail({ from: env.EMAIL_FROM || env.SMTP_FROM, to, subject, text, replyTo: options?.replyTo });
+  } catch (error) {
+    console.error("[mail] failed to send", { to, subject, host, port, error });
+    throw new AppError(502, "Email delivery is temporarily unavailable");
+  }
 }
 
 export async function sendSms(to: string, message: string, opts?: { contentSid?: string; contentVariables?: any }) {
