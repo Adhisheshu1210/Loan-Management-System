@@ -1,11 +1,10 @@
 services:
   - type: web
     name: lms-api
-    rootDir: apps/api
-    env: node
+    env: docker
     plan: starter
-    buildCommand: npm install && npm run build
-    startCommand: npm run start
+    dockerfilePath: ./apps/api/Dockerfile
+    dockerContext: .
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
