@@ -1593,5 +1593,3 @@ export async function listAdminLoans(input: { page?: number; limit?: number; sta
     limit,
   };
 }
-
-
