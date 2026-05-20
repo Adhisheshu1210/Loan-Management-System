@@ -6,7 +6,7 @@ A production-ready loan management platform with a modern fintech landing page, 
 
 Watch the product walkthrough on YouTube:
 
-https://www.youtube.com/watch?v=JQ278W8h_MQ
+https://youtu.be/gVqT4pQdsfI?si=_iJ_UjikogCZBzGr
 
 ## Highlights
 
